@@ -1,20 +1,23 @@
-public class Numero extends Expresio {
+package MathManager;
+
+
+public class Numero extends Expressio {
     private int numero = 0;
 
     public Numero() {
     }
-    /*
-    public Numero (int x){
-        this.numero=x;
+    public Numero(int numero){
+        this.numero=numero;
     }
-    @Override
+    public boolean isSymbol(){
+        return false;
+    }
+
     public int getNumero() {
         return numero;
     }
 
-    @Override
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    */
 }

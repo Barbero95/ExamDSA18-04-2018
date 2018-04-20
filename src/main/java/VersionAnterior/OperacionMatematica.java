@@ -1,9 +1,14 @@
+package VersionAnterior;
+
+import MathManager.MathManager;
+import VersionAnterior.Expresio;
+
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
 public class OperacionMatematica {
+    /*
     private Alumno alumno;
     private int resultado;
 
@@ -29,11 +34,11 @@ public class OperacionMatematica {
         this.operacioCua = operacioCua;
     }
 
-    public Alumno getAlumno() {
+    public MathManager.Alumno getAlumno() {
         return alumno;
     }
 
-    public void setAlumno(Alumno alumno) {
+    public void setAlumno(MathManager.Alumno alumno) {
         this.alumno = alumno;
     }
 
@@ -44,5 +49,5 @@ public class OperacionMatematica {
     public void setResultado(int resultado) {
         this.resultado = resultado;
     }
-
+       */
 }

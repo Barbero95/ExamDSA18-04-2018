@@ -1,6 +1,7 @@
+package MathManager;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class Instituto {
     private String nombreInstituto;
@@ -22,12 +23,9 @@ public class Instituto {
         return this.listaAlumnos;
     }
     public void NumOperacionesTotal (){
-        for (Alumno alum: listaAlumnos){
+        for (Alumno alum: listaAlumnos) {
             int x = alum.getNumOperaciones();
-            int x2 = alum.getNumOperacionesFinal();
-            if (x==x2){
-                this.numOperacionesTotales = this.numOperacionesTotales + x;
-            }
+            this.numOperacionesTotales = this.numOperacionesTotales + x;
         }
     }
     public String getNombreInstituto() {

@@ -1,3 +1,12 @@
+package Rest;
+
+//import MathManager.MathManager;
+//import MathManager.Singleton;
+//import MathManager.Numero;
+//import MathManager.Simbolo;
+import MathManager.*;
+import ReversePolishNotation.ReversePolishNotation;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,17 +26,16 @@ public class Rest {
             int x = this.math.getIniciadorRest();
             if (x==0) {
                 this.math.crearInstitutosYAlumnos();
-                OperacionMatematica op = null;
-
+                Operacion op = null;
                 Instituto instituto = this.math.consultarInstituto("Maristes");
-                Alumno alumno = this.math.consultarAlumnoString("David");
+                Alumno alumno = this.math.consultarAlumno("David");
                 List<Alumno> listaAlum = new ArrayList<Alumno>(instituto.consultarAlumnos());
                 Alumno a1 = listaAlum.get(1);
-                Queue<Expresio> operacioCua = new LinkedList<Expresio>();
-                operacioCua.add(new Expresio(1));
-                operacioCua.add(new Expresio(3));
-                operacioCua.add(new Expresio("+"));
-                op.setOperacioCua(operacioCua);
+                Queue<Expressio> operacioCua = new LinkedList<Expressio>();
+                operacioCua.add(new Numero(1));
+                operacioCua.add(new Numero(3));
+                operacioCua.add(new Simbolo("+"));
+                op.setLlistaExpressions(operacioCua);
                         this.math.realizarOperacion(op);
                         this.math.modIniciadorRest();
             }
@@ -45,9 +53,9 @@ public class Rest {
         @GET
         @Path("/listarOpeAlumn/{nom}")
         @Produces(MediaType.APPLICATION_JSON)
-        public List<OperacionMatematica> getListaOpeAlumno(@PathParam("nom") String nom) {
-            Alumno a = this.math.consultarAlumnoString(nom);
-            List<OperacionMatematica> listar = new LinkedList<OperacionMatematica>(this.math.operacionesAlumno(a));
+        public List<Operacion> getListaOpeAlumno(@PathParam("nom") String nom) {
+            Alumno a = this.math.consultarAlumno(nom);
+            List<Operacion> listar = new LinkedList<Operacion>(this.math.operacionesAlumno(a));
             return listar;
         }
 
@@ -55,8 +63,8 @@ public class Rest {
         @GET
         @Path("/listarOpeinstituto/{nom}")
         @Produces(MediaType.APPLICATION_JSON)
-        public List<OperacionMatematica> getListaOpeInstituto(@PathParam("nom") String nom) {
-            List<OperacionMatematica> listar = new LinkedList<OperacionMatematica>(this.math.operacionesInstituto(nom));
+        public List<Operacion> getListaOpeInstituto(@PathParam("nom") String nom) {
+            List<Operacion> listar = new LinkedList<Operacion>(this.math.operacionesInstituto(nom));
             return listar;
         }
 
@@ -73,8 +81,8 @@ public class Rest {
         @POST
         @Path("/realizarOperacion/{user}")
         @Consumes(MediaType.APPLICATION_JSON)
-        public Response compra (@PathParam("user") String user, OperacionMatematica op) {
-            Alumno a = this.math.consultarAlumnoString(user);
+        public Response compra (@PathParam("user") String user, Operacion op) {
+            Alumno a = this.math.consultarAlumno(user);
             boolean col  = this.math.realizarOperacion(op);
             if (col){
                 return Response.status(201).entity("ope realizada").build();

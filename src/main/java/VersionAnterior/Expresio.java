@@ -1,10 +1,12 @@
+package VersionAnterior;
+
 public class Expresio {
     /*
     private Object expresio;
 
-    public Expresio() {
+    public VersionAnterior.Expresio() {
     }
-    public Expresio(Object expresio) {
+    public VersionAnterior.Expresio(Object expresio) {
         this.expresio=expresio;
     }
 

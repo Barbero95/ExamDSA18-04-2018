@@ -1,3 +1,5 @@
+package MathManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,8 +7,7 @@ public class Alumno {
     private String nombre;
     private String instituto;
     private int numOperaciones = 0;
-    private int numOperacionesFinal = 0;
-    private List<OperacionMatematica> operacionesMatematicas = new ArrayList<OperacionMatematica>();
+    private List<Operacion> operacionesMatematicas = new ArrayList<Operacion>();
 
 
 
@@ -18,16 +19,12 @@ public class Alumno {
         this.instituto=instituto;
 
     }
-    public void addlistaOperaciones (OperacionMatematica operacion){
+    public void addlistaOperaciones (Operacion operacion){
         this.operacionesMatematicas.add(operacion);
         this.numOperaciones++;
     }
-    //otra forma de ver el numero de operaciones
-    public void numOperaciones (){
-        int x = operacionesMatematicas.size();
-        this.numOperacionesFinal += x;
-    }
-    public List<OperacionMatematica> consultaOperaciones(){
+
+    public List<Operacion> consultaOperaciones(){
         return this.operacionesMatematicas;
     }
 
@@ -52,13 +49,5 @@ public class Alumno {
 
     public void setNumOperaciones(int numOperaciones) {
         this.numOperaciones = numOperaciones;
-    }
-
-    public int getNumOperacionesFinal() {
-        return numOperacionesFinal;
-    }
-
-    public void setNumOperacionesFinal(int numOperacionesFinal) {
-        this.numOperacionesFinal = numOperacionesFinal;
     }
 }

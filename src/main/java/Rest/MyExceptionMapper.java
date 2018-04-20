@@ -1,3 +1,5 @@
+package Rest;
+
 import org.glassfish.grizzly.utils.Exceptions;
 
 import javax.ws.rs.core.Response;

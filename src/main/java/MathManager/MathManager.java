@@ -1,20 +1,21 @@
-import java.util.AbstractList;
+package MathManager;
+
 import java.util.List;
 
 public interface MathManager {
-    //boolean realizarOperacion (OperacionMatematica ope, Alumno alumno);
-    boolean realizarOperacion (OperacionMatematica ope);
+    //boolean realizarOperacion (VersionAnterior.OperacionMatematica ope, MathManager.MathManager.Alumno alumno);
+    boolean realizarOperacion (Operacion ope);
     List<Instituto> listadoInstitutos ();
     Integer procesarOperacion();
-    List<OperacionMatematica> operacionesInstituto(String nombreInstituto);
-    List<OperacionMatematica> operacionesAlumno (Alumno alumno);
+    List<Operacion> operacionesInstituto(String nombreInstituto);
+    List<Operacion> operacionesAlumno (Alumno alumno);
 
 
     void addInstituto(Instituto insti);
     void addAlumno(Alumno alum);
     Instituto consultarInstituto(String nombreInsti);
     void crearInstitutosYAlumnos();
-    Alumno consultarAlumnoString (String alumno);
+    Alumno consultarAlumno (String alumno);
     void modIniciadorTest1 ();
     void modIniciadorTest2 ();
     void modIniciadorRest ();
