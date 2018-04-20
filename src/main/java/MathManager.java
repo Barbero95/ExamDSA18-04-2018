@@ -2,7 +2,8 @@ import java.util.AbstractList;
 import java.util.List;
 
 public interface MathManager {
-    boolean realizarOperacion (OperacionMatematica ope, Alumno alumno);
+    //boolean realizarOperacion (OperacionMatematica ope, Alumno alumno);
+    boolean realizarOperacion (OperacionMatematica ope);
     List<Instituto> listadoInstitutos ();
     Integer procesarOperacion();
     List<OperacionMatematica> operacionesInstituto(String nombreInstituto);

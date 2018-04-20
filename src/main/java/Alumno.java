@@ -5,6 +5,7 @@ public class Alumno {
     private String nombre;
     private String instituto;
     private int numOperaciones = 0;
+    private int numOperacionesFinal = 0;
     private List<OperacionMatematica> operacionesMatematicas = new ArrayList<OperacionMatematica>();
 
 
@@ -19,7 +20,12 @@ public class Alumno {
     }
     public void addlistaOperaciones (OperacionMatematica operacion){
         this.operacionesMatematicas.add(operacion);
-
+        this.numOperaciones++;
+    }
+    //otra forma de ver el numero de operaciones
+    public void numOperaciones (){
+        int x = operacionesMatematicas.size();
+        this.numOperacionesFinal += x;
     }
     public List<OperacionMatematica> consultaOperaciones(){
         return this.operacionesMatematicas;
@@ -46,5 +52,13 @@ public class Alumno {
 
     public void setNumOperaciones(int numOperaciones) {
         this.numOperaciones = numOperaciones;
+    }
+
+    public int getNumOperacionesFinal() {
+        return numOperacionesFinal;
+    }
+
+    public void setNumOperacionesFinal(int numOperacionesFinal) {
+        this.numOperacionesFinal = numOperacionesFinal;
     }
 }

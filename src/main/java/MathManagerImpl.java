@@ -90,66 +90,114 @@ public class MathManagerImpl implements MathManager,ReversePolishNotation {
         }
         return false;
     }
-    public boolean realizarOperacion (OperacionMatematica ope, Alumno alumno){
-        List<Expresio> listaexpre= new LinkedList<Expresio>(ope.listaExpresionesDeUnaOperacion());
-        int contador =0;
-        List<Expresio> listaExpreACalcular = new LinkedList<Expresio>();
-        for(Expresio expre: listaexpre){
-            //aqui mirem si es un int o una operacio
-            //si es igual a un int
-            if (expre.equals(1)) {
-                listaExpreACalcular.add(expre);
-            }
-            //aqui mirem si es un simbol aleshores
-            else if(expre.equals(1)){
-                //aqui al veure que no es un numero agafariem de la listaExpreACalcular els dos valors anteriors i calculariem.
-                //modificariem la llista amb el nom valor calcular i continuariem
-            }
-            //no es ni un numero ni un simbol
-            else{
-                return false;
-            }
-            contador++;
+    //public boolean realizarOperacion (OperacionMatematica ope, Alumno alumno){
+    public boolean realizarOperacion (OperacionMatematica operacion){
+
+        Alumno alumno = operacion.getAlumno();
+        boolean resp = consultarAlumno(alumno);
+        //boolean resp = true;
+        if(resp){
+            alumno.addlistaOperaciones(operacion);
+            listaOperacionesMatematicas.add(operacion);
             return true;
+        } else{
+            return false;
         }
-        return false;
 
     }
     public Integer procesarOperacion(){
-        Expresio expre = null;
-        int resultado =0;
-        OperacionMatematica op = null;
-        op = listaOperacionesMatematicas.poll();
+        OperacionMatematica operacion = listaOperacionesMatematicas.poll();
+        //Stack<Expresio> listaExpresiones;
+        //listaExpresiones = operacion.listaExpresionesConPila();
+        //Expresio result;
+        Queue<Expresio> listaDeExpresiones = new LinkedList<Expresio>(operacion.getOperacioCua());
+        //Stack<Expresio> pilaExpresiones = new Stack<Expresio>();
 
-        return resultado;
-        /*
-        Pedido p = null;
-        p = listaPedidosTotal.poll();
+        //int res = ReversePolishNotation.process(operacion);
+        ///
 
-        if (p==null) return p;
 
-        Usuario u = p.getUsuario();
-        List<LineaDePedido> lp = p.getProductos();
-        int num = 0;
-        Producto producto;
 
-        for (LineaDePedido linea: lp) {
-            num = linea.getNum();
-            producto = linea.getProducto();
 
-            producto.incrementar(num);
-            logger.log(Level.SEVERE, "value =" + producto.getNumeroVentas());
+        Stack<Integer> pilaExpresiones = new Stack<Integer>();
+        for(Expresio expre: listaDeExpresiones){
+            //result=null;
+            if (expre.verQueEs()) {
+                //si entra es que no es una operacion y en teoria es un int
+                pilaExpresiones.push(expre.getNumero());
+            }
+            else{
+                if (expre.equals("+")){
+                    int x1 = pilaExpresiones.pop();
+                    int x2 = pilaExpresiones.pop();
+                    int operacio = (x2+x1);
+                    pilaExpresiones.push(operacio);
+                    /*
+                    Expresio expre1 = pilaExpresiones.pop();
+                    Expresio expre2 = pilaExpresiones.pop();
+                    int x1 = expre1.getNumero();
+                    int x2 = expre2.getNumero();
+                    int operacio = (x2 + x1);
+                    result.setNumero(operacio);
+                    pilaExpresiones.push(result);
+                    */
+                }if(expre.equals("-")) {
+                    int x1 = pilaExpresiones.pop();
+                    int x2 = pilaExpresiones.pop();
+                    int operacio = (x2-x1);
+                    pilaExpresiones.push(operacio);
+                    /*
+                    Expresio expre1 = pilaExpresiones.pop();
+                    Expresio expre2 = pilaExpresiones.pop();
+                    int x1 = expre1.getNumero();
+                    int x2 = expre2.getNumero();
+                    int operacio = (x2 - x1);
+                    result.setNumero(operacio);
+                    pilaExpresiones.push(result);
+                    */
+                }if(expre.equals("*")) {
+                    int x1 = pilaExpresiones.pop();
+                    int x2 = pilaExpresiones.pop();
+                    int operacio = (x2*x1);
+                    pilaExpresiones.push(operacio);
+                    /*
+                    Expresio expre1 = pilaExpresiones.pop();
+                    Expresio expre2 = pilaExpresiones.pop();
+                    int x1 = expre1.getNumero();
+                    int x2 = expre2.getNumero();
+                    int operacio = (x2 * x1);
+                    result.setNumero(operacio);
+                    pilaExpresiones.push(result);
+                    */
+                }if(expre.equals("/")) {
+                    int x1 = pilaExpresiones.pop();
+                    int x2 = pilaExpresiones.pop();
+                    int operacio = (x2/x1);
+                    pilaExpresiones.push(operacio);
+                    /*
+                    Expresio expre1 = pilaExpresiones.pop();
+                    Expresio expre2 = pilaExpresiones.pop();
+                    int x1 = expre1.getNumero();
+                    int x2 = expre2.getNumero();
+                    int operacio = (x2 / x1);
+                    result.setNumero(operacio);
+                    pilaExpresiones.push(result);
+                    */
+                } else{
+                    return null;
+                }
+            }
         }
-        u.addPedido(p);
+        //result = pilaExpresiones.pop();
+        //operacion.setResultado();
+        //return result.getNumero();
+        return pilaExpresiones.pop();
+    }
 
-        return p;
-        */
-    }
-    public Alumno consultarAlumno (String nombre){
-        Alumno alumno = this.mapaAlumnos.get(nombre);
-        return alumno;
-    }
     public List<Instituto> listadoInstitutos (){
+        for (Instituto instituto: listaInstitutos){
+            instituto.NumOperacionesTotal();
+        }
         List<Instituto> listaOrdenadaDesce = new ArrayList(listaInstitutos);
         Collections.sort(listaOrdenadaDesce, Comparator.comparing(Instituto::getNumOperacionesTotales));
         Collections.reverse(listaOrdenadaDesce);

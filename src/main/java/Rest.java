@@ -4,6 +4,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 @Path("/json")
 public class Rest {
@@ -17,17 +18,17 @@ public class Rest {
             if (x==0) {
                 this.math.crearInstitutosYAlumnos();
                 OperacionMatematica op = null;
-                Expresio expresio1 = new Expresio(1);
-                Expresio expresio2 = new Expresio("+");
-                Expresio expresio3 = new Expresio(3);
 
                 Instituto instituto = this.math.consultarInstituto("Maristes");
+                Alumno alumno = this.math.consultarAlumnoString("David");
                 List<Alumno> listaAlum = new ArrayList<Alumno>(instituto.consultarAlumnos());
                 Alumno a1 = listaAlum.get(1);
-                op.addOperacio(expresio1);
-                op.addOperacio(expresio2);
-                op.addOperacio(expresio3);
-                        this.math.realizarOperacion(op,a1);
+                Queue<Expresio> operacioCua = new LinkedList<Expresio>();
+                operacioCua.add(new Expresio(1));
+                operacioCua.add(new Expresio(3));
+                operacioCua.add(new Expresio("+"));
+                op.setOperacioCua(operacioCua);
+                        this.math.realizarOperacion(op);
                         this.math.modIniciadorRest();
             }
 
@@ -74,7 +75,7 @@ public class Rest {
         @Consumes(MediaType.APPLICATION_JSON)
         public Response compra (@PathParam("user") String user, OperacionMatematica op) {
             Alumno a = this.math.consultarAlumnoString(user);
-            boolean col  = this.math.realizarOperacion(op,a);
+            boolean col  = this.math.realizarOperacion(op);
             if (col){
                 return Response.status(201).entity("ope realizada").build();
             }

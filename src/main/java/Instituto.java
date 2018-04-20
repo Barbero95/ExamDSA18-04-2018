@@ -24,7 +24,10 @@ public class Instituto {
     public void NumOperacionesTotal (){
         for (Alumno alum: listaAlumnos){
             int x = alum.getNumOperaciones();
-            this.numOperacionesTotales = this.numOperacionesTotales + x;
+            int x2 = alum.getNumOperacionesFinal();
+            if (x==x2){
+                this.numOperacionesTotales = this.numOperacionesTotales + x;
+            }
         }
     }
     public String getNombreInstituto() {
