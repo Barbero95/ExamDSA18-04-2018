@@ -16,11 +16,9 @@ public interface MathManager {
     Instituto consultarInstituto(String nombreInsti);
     void crearInstitutosYAlumnos();
     Alumno consultarAlumno (String alumno);
-    void modIniciadorTest1 ();
-    void modIniciadorTest2 ();
+    void modIniciadorTest ();
     void modIniciadorRest ();
     int getIniciadorRest ();
-    int getIniciadorTest1 ();
-    int getIniciadorTest2 ();
+    int getIniciadorTest ();
 
 }

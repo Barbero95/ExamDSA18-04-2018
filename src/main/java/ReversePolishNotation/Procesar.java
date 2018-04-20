@@ -9,7 +9,7 @@ import java.util.Stack;
 public class Procesar implements ReversePolishNotation {
 
     public  Integer procesarOp(Operacion operacion){
-        int resultado=0;
+        int resultado;
 
         Queue<Expressio> listaDeExpresiones = new LinkedList<Expressio>(operacion.getLlistaExpressions());
         Stack<Integer> pilaExpresiones = new Stack<Integer>();
@@ -29,19 +29,19 @@ public class Procesar implements ReversePolishNotation {
                     int operacio = (x2+x1);
                     pilaExpresiones.push(operacio);
 
-                }if(simboloString.equals("-")) {
+                }else if(simboloString.equals("-")) {
                     int x1 = pilaExpresiones.pop();
                     int x2 = pilaExpresiones.pop();
                     int operacio = (x2-x1);
                     pilaExpresiones.push(operacio);
 
-                }if(simboloString.equals("*")) {
+                }else if(simboloString.equals("*")) {
                     int x1 = pilaExpresiones.pop();
                     int x2 = pilaExpresiones.pop();
                     int operacio = (x2*x1);
                     pilaExpresiones.push(operacio);
 
-                }if(simboloString.equals("/")) {
+                }else if(simboloString.equals("/")) {
                     int x1 = pilaExpresiones.pop();
                     int x2 = pilaExpresiones.pop();
                     int operacio = (x2/x1);
@@ -55,5 +55,12 @@ public class Procesar implements ReversePolishNotation {
         resultado = pilaExpresiones.pop();
         operacion.setResultado(resultado);
         return resultado;
+    }
+    private int iniciadorTest2=0;
+    public void modIniciadorTest2 (){
+        this.iniciadorTest2=1;
+    }
+    public int getIniciadorTest2(){
+        return this.iniciadorTest2;
     }
 }

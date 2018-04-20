@@ -12,8 +12,7 @@ public class MathManagerImpl implements MathManager {
     List<Instituto> listaInstitutos = new ArrayList<Instituto>();
     HashMap<String,Alumno> mapaAlumnos = new HashMap<String, Alumno>();
 
-    private int iniciadorTest1=0;
-    private int iniciadorTest2=0;
+    private int iniciadorTest=0;
     private int iniciadorRest =0;
     public int getIniciadorRest (){
         return this.iniciadorRest;
@@ -21,18 +20,13 @@ public class MathManagerImpl implements MathManager {
     public void modIniciadorRest (){
         this.iniciadorRest=1;
     }
-    public void modIniciadorTest1 (){
-        this.iniciadorTest1=1;
+    public void modIniciadorTest (){
+        this.iniciadorTest=1;
     }
-    public int getIniciadorTest1(){
-        return this.iniciadorTest1;
+    public int getIniciadorTest(){
+        return this.iniciadorTest;
     }
-    public void modIniciadorTest2 (){
-        this.iniciadorTest2=1;
-    }
-    public int getIniciadorTest2(){
-        return this.iniciadorTest2;
-    }
+
     public void crearInstitutosYAlumnos(){
         Instituto instituto1 = new Instituto("Maristes");
         Instituto instituto2 = new Instituto("Drassanes");
@@ -92,7 +86,7 @@ public class MathManagerImpl implements MathManager {
         }
         return null;
     }
-    //public boolean realizarOperacion (VersionAnterior.OperacionMatematica ope, Alumno alumno){
+
     public boolean realizarOperacion (Operacion operacion){
         Alumno alumno = operacion.getAlumno();
         alumno = consultarAlumno(alumno);
