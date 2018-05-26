@@ -16,6 +16,6 @@ public class Singleton {
         private MathManagerImpl impl = new MathManagerImpl();
 
         public MathManagerImpl getImpl() {
-            return impl;
-        }
+        return impl;
+    }
 }

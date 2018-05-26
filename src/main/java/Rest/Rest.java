@@ -41,6 +41,13 @@ public class Rest {
             }
 
         }
+        //consultar alumno
+        @GET
+        @Path("/consultarAlumo/{id}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Alumno getAlumno(@PathParam("id") String nombre) {
+            return this.math.consultarAlumno(nombre);
+        }
         //listado institutos
         @GET
         @Path("/listarInstitutos")

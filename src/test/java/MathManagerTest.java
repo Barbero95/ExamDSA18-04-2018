@@ -2,8 +2,11 @@ import MathManager.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.rmi.runtime.Log;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
@@ -15,6 +18,7 @@ public class MathManagerTest {
     Alumno david =null;
     Alumno ruben =null;
     Alumno jorge = null;
+    private final static Logger LOGGER = Logger.getLogger("bitacora.subnivel.Control");
     @Before
     public void setUp() {
         this.math = Singleton.getInstance().getImpl();
@@ -163,17 +167,18 @@ public class MathManagerTest {
     public void procesarTest(){
         Operacion op1;
         Queue<Expressio> operacioCua = new LinkedList<Expressio>();
-        operacioCua.add(new Numero(5));
-        operacioCua.add(new Numero(1));
+        operacioCua.add(new Numero(7));
+        operacioCua.add(new Numero(13));
         operacioCua.add(new Simbolo("+"));
-        operacioCua.add(new Numero(5));
+        operacioCua.add(new Numero(40));
         operacioCua.add(new Simbolo("-"));
 
         Alumno alumno = this.math.consultarAlumno("David");
         op1 = new Operacion(operacioCua,alumno);
         boolean resp = this.math.realizarOperacion(op1);
         int x = this.math.procesarOperacion();
-        assertEquals(1, x);
+        LOGGER.log(Level.INFO, "result:" + op1.getResultado() );
+        assertEquals(-20, x);
     }
 
 }
