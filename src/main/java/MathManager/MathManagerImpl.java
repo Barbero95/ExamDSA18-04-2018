@@ -104,7 +104,7 @@ public class MathManagerImpl implements MathManager {
         Operacion operacion = listaOperacionesMatematicas.poll();
         ReversePolishNotation rpm = new Procesar();
         int res = rpm.procesarOp(operacion);
-
+        operacion.setResultado(res);
         return res;
     }
 

@@ -35,9 +35,9 @@ public class Rest {
                 operacioCua.add(new Numero(1));
                 operacioCua.add(new Numero(3));
                 operacioCua.add(new Simbolo("+"));
-                op.setLlistaExpressions(operacioCua);
-                        this.math.realizarOperacion(op);
-                        this.math.modIniciadorRest();
+                op = new Operacion(operacioCua,a1);
+                this.math.realizarOperacion(op);
+                this.math.modIniciadorRest();
             }
 
         }
@@ -53,6 +53,7 @@ public class Rest {
         @GET
         @Path("/listarOpeAlumn/{nom}")
         @Produces(MediaType.APPLICATION_JSON)
+        //@Produces(MediaType.TEXT_PLAIN)
         public List<Operacion> getListaOpeAlumno(@PathParam("nom") String nom) {
             Alumno a = this.math.consultarAlumno(nom);
             List<Operacion> listar = new LinkedList<Operacion>(this.math.operacionesAlumno(a));
@@ -81,8 +82,10 @@ public class Rest {
         @POST
         @Path("/realizarOperacion/{user}")
         @Consumes(MediaType.APPLICATION_JSON)
-        public Response compra (@PathParam("user") String user, Operacion op) {
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response compra (@PathParam("user") String user, Queue<Expressio> llistaExpressions) {
             Alumno a = this.math.consultarAlumno(user);
+            Operacion op = new Operacion(llistaExpressions,a);
             boolean col  = this.math.realizarOperacion(op);
             if (col){
                 return Response.status(201).entity("ope realizada").build();
@@ -90,7 +93,6 @@ public class Rest {
             else{
                 return Response.status(409).entity("Error al realizar").build();
             }
-
         }
 
 
