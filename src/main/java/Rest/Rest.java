@@ -46,6 +46,7 @@ public class Rest {
         @Path("/consultarAlumo/{id}")
         @Produces(MediaType.APPLICATION_JSON)
         public Alumno getAlumno(@PathParam("id") String nombre) {
+            System.out.println("i********** getAlumno "+ nombre);
             return this.math.consultarAlumno(nombre);
         }
         //listado institutos
